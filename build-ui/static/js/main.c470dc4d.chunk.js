@@ -1,0 +1,2 @@
+(this.webpackJsonprecipes=this.webpackJsonprecipes||[]).push([[0],{9:function(e,t,n){"use strict";n.r(t);var c=n(0),r=n.n(c),s=n(3),i=n.n(s),o=n(1);function d(){return Object(o.jsx)("div",{children:"no"})}i.a.render(Object(o.jsx)(r.a.StrictMode,{children:Object(o.jsx)(d,{})}),document.getElementById("root"))}},[[9,1,2]]]);
+//# sourceMappingURL=main.c470dc4d.chunk.js.map

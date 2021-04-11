@@ -1,12 +1,19 @@
-const express = require('express');
 require('dotenv').config();
+const express = require('express');
 const path = require('path');
+
+const recipesRoutes = require('./routes/recipeRoutes');
+
 const app = express();
+const PORT = process.env.PORT ?? 3000;
 
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app/build/index.html'));
-});
+// Parse body middleware
+app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'app/build')));
+// Recipes controller routes
+app.use('/api/recipes', recipesRoutes);
 
-app.listen(process.env.PORT ?? 3000);
+// Serve the app if nothing else to do
+app.use(express.static(path.join(__dirname, 'build-ui')));
+
+app.listen(PORT);
