@@ -64,11 +64,8 @@ async function createRecipe(req, res) {
 
 async function updateRecipe(req, res) {
     const id = Number(req.params.id);
-    if (!id) {
-        return res.sendStatus(400);
-    }
     const { recipe, steps, ingredients } = req.body;
-    if (!recipe || !steps || !ingredients) {
+    if (!id || !recipe || !steps || !ingredients) {
         return res.sendStatus(400);
     }
     try {
@@ -92,9 +89,26 @@ async function updateRecipe(req, res) {
     }
 }
 
+async function deleteRecipe(req, res) {
+    const id = Number(req.params.id);
+    if (!id) {
+        return res.sendStatus(400);
+    }
+    try {
+        await prisma.recipe.delete({
+            where: { id },
+        });
+        return res.sendStatus(200);
+    } catch (e) {
+        console.error(e);
+        return res.sendStatus(500);
+    }
+}
+
 module.exports = {
     getRecipes,
     getRecipeById,
     createRecipe,
     updateRecipe,
+    deleteRecipe,
 };
