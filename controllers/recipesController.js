@@ -62,8 +62,39 @@ async function createRecipe(req, res) {
     }
 }
 
+async function updateRecipe(req, res) {
+    const id = Number(req.params.id);
+    if (!id) {
+        return res.sendStatus(400);
+    }
+    const { recipe, steps, ingredients } = req.body;
+    if (!recipe || !steps || !ingredients) {
+        return res.sendStatus(400);
+    }
+    try {
+        await prisma.recipe.update({
+            where: { id },
+            data: {
+                ingredients: {
+                    deleteMany: {},
+                    create: ingredients,
+                },
+                steps: {
+                    deleteMany: {},
+                    create: steps,
+                },
+            },
+        });
+        return res.sendStatus(200);
+    } catch (e) {
+        console.error(e);
+        return res.sendStatus(500);
+    }
+}
+
 module.exports = {
     getRecipes,
     getRecipeById,
     createRecipe,
+    updateRecipe,
 };
