@@ -1,6 +1,17 @@
-const path = require("path");
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+
+async function findOrFail(id) {
+    try {
+        const recipe = await prisma.recipe.findUnique({ where: { id } });
+        if (recipe === null) {
+            return { code: 404 };
+        }
+        return { recipe, code: 200 };
+    } catch (e) {
+        return { code: 500 };
+    }
+}
 
 async function getRecipes(req, res) {
     try {
@@ -65,9 +76,16 @@ async function createRecipe(req, res) {
 async function updateRecipe(req, res) {
     const id = Number(req.params.id);
     const { recipe, steps, ingredients } = req.body;
+
     if (!id || !recipe || !steps || !ingredients) {
         return res.sendStatus(400);
     }
+    
+    const { code } = await findOrFail(id);
+    if (code !== 200) {
+        return res.sendStatus(code);
+    }
+
     try {
         await prisma.recipe.update({
             where: { id },
@@ -94,10 +112,18 @@ async function deleteRecipe(req, res) {
     if (!id) {
         return res.sendStatus(400);
     }
+
+    const { code } = await findOrFail(id);
+    if (code !== 200) {
+        return res.sendStatus(code);
+    }
+
     try {
-        await prisma.recipe.delete({
-            where: { id },
-        });
+        const recipe = await prisma.recipe.findUnique({ where: { id } });
+        if (recipe === null) {
+            return res.sendStatus(404);
+        }
+        await prisma.recipe.delete({ where: { id } });
         return res.sendStatus(200);
     } catch (e) {
         console.error(e);
