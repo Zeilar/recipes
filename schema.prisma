@@ -11,7 +11,8 @@ model Recipe {
     id Int @id @default(autoincrement())
     name String
     category String
-    minutes Int?
+    minutes Int
+    description String
     ingredients Ingredient[]
     steps Step[]
 }
