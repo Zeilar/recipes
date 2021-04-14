@@ -8,12 +8,8 @@ export default function Main() {
         <Wrapper>
             <Router>
                 <Switch>
-                    <Route path="/" exact>
-                        <Home />
-                    </Route>
-                    <Route path="/recipe/:id/:name?" exact>
-                        <Recipe />
-                    </Route>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/recipe/:id/:name?" exact component={Recipe} />
                 </Switch>
             </Router>
         </Wrapper>
