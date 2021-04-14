@@ -26,36 +26,44 @@ export default function RecipeThumb({ recipe = {} }) {
 }
 
 const Description = styled.p`
+
 `;
 
 const DescriptionContainer = styled.div`
     width: 100%;
-    transition: 0.35s;
+    transition: height 0.35s, margin-top 0.35s;
     overflow: hidden;
     height: 0;
 `;
 
 const Wrapper = styled(Link)`
+    border-bottom: 5px solid rgb(${({ theme }) => theme.color.bodyLight});
     padding: 15px;
     width: 100%;
     text-decoration: none;
     color: inherit;
     display: flex;
     align-items: center;
-    transition: 0.35s;
+    transition: transform 0.35s;
     box-shadow: 0 0 4px 0 black;
     ${({ theme, height }) => css`
-    background-color: rgb(${theme.color.primary});
-    border-radius: ${theme.borderRadius}px;
-    &:hover {
-        background-color: rgb(${theme.color.secondary});
-        ${DescriptionContainer} {
-            height: ${height}px;
-            margin-top: 10px;
+        background-color: rgb(${theme.color.primary});
+        border-radius: ${theme.borderRadius}px;
+        &:hover {
+            background-color: rgba(${theme.color.secondary});
         }
-    }
+        &:active, &:focus, &:hover {
+            ${DescriptionContainer} {
+                height: ${height}px;
+                margin-top: 10px;
+            }
+        }
+        &:active, &:focus {
+            background-color: rgba(${theme.color.bodyLight});
+            color: white;
+        }
     `}
-    `;
+`;
 
 const Header = styled.h3`
     font-weight: normal;

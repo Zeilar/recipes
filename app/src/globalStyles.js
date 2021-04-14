@@ -11,6 +11,10 @@ export const GlobalStyles = createGlobalStyle`
         list-style: none;
     }
 
+    ::selection {
+        /* color: rgb(0, 127, 255); */
+    }
+
     body {
         font-family: Roboto;
     }
