@@ -6,5 +6,5 @@ export const theme = {
         secondary: "200, 200, 200",
         textPrimary: "15, 15, 15",
     },
-    borderRadius: 5,
+    borderRadius: 3,
 };

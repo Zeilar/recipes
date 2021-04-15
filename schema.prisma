@@ -7,12 +7,22 @@ generator client {
     provider = "prisma-client-js"
 }
 
+model User {
+    id Int @id @default(autoincrement())
+    username String @unique
+    password String
+    recipes Recipe[]
+}
+
 model Recipe {
     id Int @id @default(autoincrement())
     name String
     category String
     minutes Int
     description String
+    image String @unique
+    user User? @relation(fields: [user_id], references: [id])
+    user_id Int?
     ingredients Ingredient[]
     steps Step[]
 }
@@ -32,10 +42,3 @@ model Step {
     recipe Recipe? @relation(fields: [recipe_id], references: [id])
     recipe_id Int?
 }
-
-// model User {
-//     id    Int     @id @default(autoincrement())
-//     email String  @unique
-//     name  String?
-//     posts Post[]
-// }

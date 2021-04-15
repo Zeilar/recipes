@@ -1,25 +1,21 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import useFetch from '../hooks/useFetch';
 
 export default function Recipe({ match }) {
-    const [recipe, setRecipe] = useState({});
-    const [loading, setLoading] = useState(true);
+    const { data, loading } = useFetch(`http://localhost:3000/api/recipes/${match.params.id}`);
 
-    useEffect(() => {
-        (async () => {
-            const response = await fetch(`http://localhost:3000/api/recipes/${match.params.id}`);
-            if (response.status !== 200) {
-                return alert("Error fetching posts");
-            }
-            const data = await response.json();
-            setRecipe(data);
-            setLoading(false);
-        })();
-    }, [match.params.id]);
+    console.log(data, loading);
 
     return (
-        <div>
-            
-        </div>
+        <Wrapper>
+            {data.name}
+        </Wrapper>
     );
 }
+
+const Wrapper = styled.article`
+    ${({ theme }) => css`
+        background-color: rgb(${theme.color.bodyLight});
+    `}
+`;

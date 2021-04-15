@@ -35,9 +35,7 @@ async function getRecipeById(req, res) {
     }
     try {
         const recipe = await prisma.recipe.findUnique({
-            where: {
-                id: id,
-            },
+            where: { id },
             include: {
                 ingredients: true,
                 steps: true,
