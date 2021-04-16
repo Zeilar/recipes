@@ -1,56 +1,30 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import useFetch from '../hooks/useFetch';
 import { UserContext } from './contexts/UserContext';
 import RecipeThumb from './RecipeThumb';
+import { mdiChefHat } from '@mdi/js';
+import Icon from '@mdi/react';
+import { Row } from './styled-components';
+import Loader from './Loader';
 
 export default function Home() {
-    const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(true);
-
     const { user } = useContext(UserContext);
 
+    const { data: recipes, loading } = useFetch("http://localhost:3000/api/recipes");
+
     useEffect(() => {
-        console.log(user)        
+        console.log(user)
     }, [user]);
-
-    async function login() {
-        await fetch("http://localhost:3000/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: "Philip",
-                password: "123",
-            }),
-        });
-    }
-
-    async function auth() {
-        await fetch("http://localhost:3000/api/auth");
-    }
-
-    async function logout() {
-        await fetch("http://localhost:3000/api/auth/logout");
-    }
-
-    useEffect(() => {
-        (async () => {
-            const response = await fetch("http://localhost:3000/api/recipes");
-            if (response.status !== 200) {
-                return alert("Error fetching posts");
-            }
-            const data = await response.json();
-            setRecipes(data);
-            setLoading(false);
-        })();
-    }, []);
 
     return (
         <Wrapper>
-            <button onClick={login} style={{ margin: 50 }}>Login</button>
-            <button onClick={auth} style={{ margin: 50 }}>Authenticate</button>
-            <button onClick={logout} style={{ margin: 50 }}>Logout</button>
+            <Loader message="Preparing your meals ..." />
+            <Header as={Row} justify="center" align="center">
+                <Title>Angelin</Title>
+                <TitleIcon />
+                <Title>Recipes</Title>
+            </Header>
             <Recipes>
                 {recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
             </Recipes>
@@ -68,4 +42,24 @@ const Recipes = styled.div`
     display: grid;
     grid-gap: 15px;
     width: 500px;
+`;
+
+const Header = styled.header`
+    padding: 60px;
+`;
+
+const Title = styled.h1`
+    color: rgb(${({ theme }) => theme.color.primary});
+    font-family: Lobster;
+    letter-spacing: 3px;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: normal;
+`;
+
+const TitleIcon = styled(Icon).attrs({ path: mdiChefHat })`
+    color: rgb(${({ theme }) => theme.color.bodyLight});
+    width: 4rem;
+    height: 4rem;
+    margin: 0 15px;
 `;

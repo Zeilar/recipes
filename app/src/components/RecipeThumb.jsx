@@ -15,7 +15,7 @@ export default function RecipeThumb({ recipe = {} }) {
         >
             <Row justify="space-between" align="center" block>
                 <Header>{recipe.name}</Header>
-                <Time>{recipe.minutes}</Time>
+                <Time>{recipe.minutes} min</Time>
                 <TimeIcon />
             </Row>
             <DescriptionContainer>
@@ -55,33 +55,39 @@ const wrapperWithImage = css`
 `;
 
 const Wrapper = styled(Link)`
-    border-bottom: 4px solid rgb(${({ theme }) => theme.color.bodyLight});
     padding: 20px;
     width: 100%;
     text-decoration: none;
-    color: white;
+    color: rgb(${({ theme }) => theme.color.primary});
     display: flex;
     align-items: center;
-    transition: transform 0.35s;
+    transition: 0.35s;
     box-shadow: 0 0 4px 0 black;
+    &:hover {
+        border-color: rgb(${({ theme }) => theme.color.primary});
+    }
     ${({ theme, height, image }) => css`
+        border-bottom: 4px solid rgb(${theme.color.bodyLight});
         background-image: ${image && `url("/assets/recipe-images/${image}.jpg")`};
         border-radius: ${theme.borderRadius}px;
         ${image ? wrapperWithImage : css`
             background-color: rgb(${theme.color.primary});
-            color: rgb(${({ theme }) => theme.color.textPrimary});
+            color: rgb(${theme.color.textPrimary});
             &:hover {
                 background-color: rgba(${theme.color.secondary});
             }
             &:active, &:focus {
                 background-color: rgba(${theme.color.bodyLight});
-                color: white;
+                color: rgb(${theme.color.primary});
             }
         `}
         &:active, &:focus, &:hover {
             ${DescriptionContainer} {
                 height: ${height}px;
                 margin-top: 10px;
+            }
+            ${Header} {
+                text-decoration: underline;
             }
         }
     `}
@@ -94,6 +100,10 @@ const Header = styled.h3`
 
 const Time = styled.span`
     margin-left: auto;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-family: Josefin Sans;
+    letter-spacing: 1px;
 `;
 
 const TimeIcon = styled(Icon).attrs({ path: mdiClockTimeFourOutline })`
