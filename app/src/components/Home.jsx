@@ -19,14 +19,14 @@ export default function Home() {
 
     return (
         <Wrapper>
-            <Loader message="Preparing your meals ..." />
             <Header as={Row} justify="center" align="center">
                 <Title>Angelin</Title>
                 <TitleIcon />
                 <Title>Recipes</Title>
             </Header>
+            {loading && <Loader message="Preparing your meals" />}
             <Recipes>
-                {recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
+                {!loading && recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
             </Recipes>
         </Wrapper>
     );
