@@ -26,7 +26,7 @@ export default function Home() {
             </Header>
             {loading && <Loader message="Preparing your meals" />}
             <Recipes>
-                {!loading && recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
+                {recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
             </Recipes>
         </Wrapper>
     );
