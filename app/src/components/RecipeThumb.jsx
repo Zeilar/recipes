@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { mdiClockTimeFourOutline } from '@mdi/js';
@@ -6,12 +6,20 @@ import Icon from '@mdi/react';
 import { Row, Col } from './styled-components';
 
 export default function RecipeThumb({ recipe = {} }) {
+    const [height, setHeight] = useState(0);
     const description = useRef();
+
+    useEffect(() => {
+        const element = description.current;
+        if (element) {
+            setHeight(element.getBoundingClientRect().height);
+        }
+    }, []);
 
     return (
         <Col
-            to={`/recipe/${recipe.id}/${recipe.name.replace(' ', '-')}`} image={recipe.image}
-            height={description.current?.getBoundingClientRect()?.height} as={Wrapper}
+            to={`/recipe/${recipe.id}/${recipe.name.replace(' ', '-')}`}
+            height={height} as={Wrapper} image={recipe.image}
         >
             <Row justify="space-between" align="center" block>
                 <Header>{recipe.name}</Header>
@@ -58,27 +66,27 @@ const Wrapper = styled(Link)`
     padding: 20px;
     width: 100%;
     text-decoration: none;
-    color: rgb(${({ theme }) => theme.color.primary});
+    color: rgb(${({ theme }) => theme.color.textPrimary});
     display: flex;
     align-items: center;
     transition: 0.35s;
     box-shadow: 0 0 4px 0 black;
     &:hover {
-        border-color: rgb(${({ theme }) => theme.color.primary});
+        border-color: rgb(${({ theme }) => theme.color.textPrimary});
     }
     ${({ theme, height, image }) => css`
         border-bottom: 4px solid rgb(${theme.color.bodyLight});
         background-image: ${image && `url("/assets/recipe-images/${image}.jpg")`};
         border-radius: ${theme.borderRadius}px;
         ${image ? wrapperWithImage : css`
-            background-color: rgb(${theme.color.primary});
+            background-color: rgb(${theme.color.textPrimary});
             color: rgb(${theme.color.textPrimary});
             &:hover {
                 background-color: rgba(${theme.color.secondary});
             }
             &:active, &:focus {
                 background-color: rgba(${theme.color.bodyLight});
-                color: rgb(${theme.color.primary});
+                color: rgb(${theme.color.textPrimary});
             }
         `}
         &:active, &:focus, &:hover {

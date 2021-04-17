@@ -26,7 +26,7 @@ export default function Home() {
             </Header>
             {loading && <Loader message="Preparing your meals" />}
             <Recipes>
-                {recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
+                {!loading && recipes.map(recipe => <RecipeThumb key={recipe.id} recipe={recipe} />)}
             </Recipes>
         </Wrapper>
     );
@@ -49,7 +49,7 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-    color: rgb(${({ theme }) => theme.color.primary});
+    color: rgb(${({ theme }) => theme.color.textPrimary});
     font-family: Lobster;
     letter-spacing: 3px;
     text-align: center;

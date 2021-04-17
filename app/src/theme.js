@@ -5,7 +5,8 @@ export const theme = {
         bodyDark: "35, 15, 5",
         primary: "235, 235, 235",
         secondary: "200, 200, 200",
-        textPrimary: "15, 15, 15",
+        textPrimary: "235, 235, 235",
+        textSecondary: "15, 15, 15",
     },
     borderRadius: 3,
 };
