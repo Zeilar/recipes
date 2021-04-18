@@ -52,7 +52,7 @@ export default function Recipe({ match }) {
                         <Styles.Instruction>
                             <Styles.InstructionHeader>Steps</Styles.InstructionHeader>
                             <Styles.InstructionContent>
-                                {recipe.steps.map((step, i) => <Step step={step} index={i} key={step.id} />)}
+                                {recipe.steps.map((step, i) => <Step step={step} index={i + 1} key={step.id} />)}
                             </Styles.InstructionContent>
                         </Styles.Instruction>
                     </Styles.Instructions>
