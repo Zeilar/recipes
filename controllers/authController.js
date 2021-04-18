@@ -16,7 +16,7 @@ async function authenticate(req, res) {
 function logout(req, res) {
     try {
         delete req.session.user;
-        res.redirect("/");
+        res.sendStatus(200);
     } catch (e) {
         res.sendStatus(500);
     }

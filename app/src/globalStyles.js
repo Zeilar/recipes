@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     ::selection {
-        /* color: rgb(0, 127, 255); */
+        color: rgb(0, 127, 255);
     }
 
     body {

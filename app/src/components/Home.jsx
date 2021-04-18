@@ -14,7 +14,7 @@ export default function Home() {
     const { data: recipes, loading } = useFetch("http://localhost:3000/api/recipes");
 
     useEffect(() => {
-        console.log(user)
+        // console.log(user)
     }, [user]);
 
     return (

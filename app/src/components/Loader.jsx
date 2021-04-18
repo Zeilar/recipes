@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { mdiPotSteamOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import { Col, Row } from './styled-components';
 
 export default function Loader({ loading, message = null }) {
+    if (loading === false) {
+        return null;
+    }
+
     return (
         <Wrapper as={Col} justify="center" align="center">
             <IconOutlined />

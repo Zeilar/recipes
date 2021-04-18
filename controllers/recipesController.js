@@ -39,11 +39,13 @@ async function getRecipeById(req, res) {
             include: {
                 ingredients: true,
                 steps: true,
+                user: true,
             },
         });
         if (!recipe) {
             return res.sendStatus(404);
         }
+        delete recipe.user.password;
         return res.json(recipe);
     } catch (e) {
         console.error(e);

@@ -7,6 +7,7 @@ export const theme = {
         secondary: "200, 200, 200",
         textPrimary: "235, 235, 235",
         textSecondary: "15, 15, 15",
+        link: "0, 127, 255",
     },
     borderRadius: 3,
 };
