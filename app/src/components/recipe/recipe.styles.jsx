@@ -104,14 +104,6 @@ export const Ingredient = styled(Row)`
 
 `;
 
-export const Step = styled(Row).attrs({ align: "center" })`
-
-`;
-
-export const StepCheckbox = styled.div`
-    
-`;
-
 export const StepNumber = styled.span`
     margin-right: 10px;
     font-family: Rubik;
@@ -121,4 +113,12 @@ export const StepNumber = styled.span`
 
 export const StepText = styled.p`
     
+`;
+
+export const Step = styled(Row).attrs({ align: "center" })`
+    ${({ checked }) => checked && css`
+        ${StepText}, ${StepNumber} {
+            opacity: 0.35;
+        }
+    `}
 `;

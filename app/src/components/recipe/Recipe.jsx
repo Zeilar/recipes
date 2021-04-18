@@ -4,7 +4,7 @@ import Loader from '../Loader';
 import { Col, Row } from '../styled-components';
 import { mdiClockTimeFourOutline, mdiFormatListCheckbox, mdiFoodVariant } from '@mdi/js';
 import * as Styles from './recipe.styles';
-import Checkbox from './Checkbox';
+import Step from './RecipeStep';
 
 function pluralize(string, number) {
     return number > 1 ? `${string}s` : string;
@@ -52,13 +52,7 @@ export default function Recipe({ match }) {
                         <Styles.Instruction>
                             <Styles.InstructionHeader>Steps</Styles.InstructionHeader>
                             <Styles.InstructionContent>
-                                {recipe.steps.map((step, i) => (
-                                    <Styles.Step key={step.id}>
-                                        <Checkbox />
-                                        <Styles.StepNumber>{i}</Styles.StepNumber>
-                                        <Styles.StepText>{step.value}</Styles.StepText>
-                                    </Styles.Step>
-                                ))}
+                                {recipe.steps.map((step, i) => <Step step={step} index={i} key={step.id} />)}
                             </Styles.InstructionContent>
                         </Styles.Instruction>
                     </Styles.Instructions>

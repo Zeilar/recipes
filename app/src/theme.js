@@ -6,6 +6,7 @@ export const theme = {
         primary: "235, 235, 235",
         secondary: "200, 200, 200",
         textPrimary: "235, 235, 235",
+        textMuted: "150, 150, 150",
         textSecondary: "15, 15, 15",
         link: "0, 127, 255",
     },
