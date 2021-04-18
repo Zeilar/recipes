@@ -16,6 +16,6 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-family: Roboto;
+        font-family: Libre Franklin;
     }
 `;

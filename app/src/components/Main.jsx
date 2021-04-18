@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled, { css } from 'styled-components';
 import Home from "./Home";
-import Recipe from "./Recipe";
+import Recipe from "./recipe/Recipe";
 
 export default function Main() {
     return (
