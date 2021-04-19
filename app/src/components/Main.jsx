@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled, { css } from 'styled-components';
-import Home from "./Home";
-import Recipe from "./recipe/Recipe";
+import Home from "./views/Home";
+import Recipe from "./views/recipe/Recipe";
 
 export default function Main() {
     return (
@@ -10,6 +10,9 @@ export default function Main() {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/recipe/:id/:name?" exact component={Recipe} />
+                    <Route>
+                        404
+                    </Route>
                 </Switch>
             </Router>
         </Wrapper>

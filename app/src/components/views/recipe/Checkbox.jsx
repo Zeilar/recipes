@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { mdiCheck } from '@mdi/js';
 import Icon from '@mdi/react';
-import { Row } from '../styled-components';
+import { Row } from '../../styled-components';
 
 export default function Checkbox({ checked, toggleChecked, ...props }) {
     return (

@@ -1,12 +1,12 @@
 import { useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import useFetch from '../hooks/useFetch';
-import { UserContext } from './contexts/UserContext';
-import RecipeThumb from './RecipeThumb';
+import useFetch from '../../hooks/useFetch';
+import { UserContext } from '../contexts/UserContext';
+import RecipeThumb from '../RecipeThumb';
 import { mdiChefHat } from '@mdi/js';
 import Icon from '@mdi/react';
-import { Row } from './styled-components';
-import Loader from './Loader';
+import { Row } from '../styled-components';
+import Loader from '../Loader';
 
 export default function Home() {
     const { user } = useContext(UserContext);

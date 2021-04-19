@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { Col, Row } from '../styled-components';
+import { Col, Row } from '../../styled-components';
 import Icon from '@mdi/react';
 
 export const gridItem = css`
@@ -96,12 +96,21 @@ export const InstructionHeader = styled.h2`
 export const InstructionContent = styled.div`
     ${gridItem}
     padding: 30px;
-    grid-gap: 15px;
+    grid-gap: 30px;
     display: grid;
 `;
 
-export const Ingredient = styled(Row)`
+export const Ingredient = styled(Row).attrs({ align: "center" })`
 
+`;
+
+export const IngredientAmount = styled.div`
+    width: 5rem;
+    font-weight: bold;
+`;
+
+export const IngredientText = styled.p`
+    
 `;
 
 export const StepNumber = styled.span`
@@ -109,10 +118,11 @@ export const StepNumber = styled.span`
     font-family: Rubik;
     font-size: 1.5rem;
     width: 1rem;
+    transition: 0.05s;
 `;
 
 export const StepText = styled.p`
-    
+    transition: 0.05s;
 `;
 
 export const Step = styled(Row).attrs({ align: "center" })`

@@ -7,11 +7,11 @@ export function UserContextProvider({ children }) {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch("http://localhost:3000/api/auth");
-            if (response.code === 200) {
+            try {
+                const response = await fetch("http://localhost:3000/api/auth");
                 const data = await response.json();
                 setUser(data);
-            } else {
+            } catch (e) {
                 setUser(null);
             }
         })();
@@ -34,7 +34,7 @@ export function UserContextProvider({ children }) {
         }
     }
 
-    const isLoggedIn = user != null;
+    const isLoggedIn = Boolean(user);
     const loading = user === undefined;
 
     const values = {

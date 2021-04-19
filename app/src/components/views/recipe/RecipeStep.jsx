@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { useState } from 'react';
 import Checkbox from './Checkbox';
 import * as Styles from './recipe.styles';
 

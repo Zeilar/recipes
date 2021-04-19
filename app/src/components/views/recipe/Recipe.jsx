@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import useFetch from '../../hooks/useFetch';
-import Loader from '../Loader';
-import { Col, Row } from '../styled-components';
+import { useState, useEffect, useContext } from 'react';
+import useFetch from '../../../hooks/useFetch';
+import Loader from '../../Loader';
+import { Col, Row } from '../../styled-components';
 import { mdiClockTimeFourOutline, mdiFormatListCheckbox, mdiFoodVariant } from '@mdi/js';
 import * as Styles from './recipe.styles';
 import Step from './RecipeStep';
+import EditRecipe from './EditRecipe';
+import { UserContext } from '../../contexts/UserContext';
 
 function pluralize(string, number) {
     return number > 1 ? `${string}s` : string;
@@ -13,11 +15,27 @@ function pluralize(string, number) {
 export default function Recipe({ match }) {
     const { data: recipe, loading } = useFetch(`http://localhost:3000/api/recipes/${match.params.id}`);
 
+    const [editing, setEditing] = useState(false);
+    const { isLoggedIn } = useContext(UserContext);
+
+    function closeEditMode() {
+        setEditing(false);
+    }
+
+    function openEditMode() {
+        setEditing(true);
+    }
+
+    if (editing) {
+        return <EditRecipe data={recipe} closeEditMode={closeEditMode} />
+    }
+
     return (
         <Styles.Wrapper as={Col}>
             {loading && <Loader message="Loading your recipe" />}
             {!loading && recipe && (
                 <Styles.Body>
+                    <button onClick={openEditMode}>Edit</button>
                     <Styles.Header>
                         <Styles.HeaderMeta>
                             <Styles.Title>{recipe.name}</Styles.Title>
@@ -45,7 +63,12 @@ export default function Recipe({ match }) {
                             <Styles.InstructionHeader>Ingredients</Styles.InstructionHeader>
                             <Styles.InstructionContent>
                                 {recipe.ingredients.map(ingredient => (
-                                    <Styles.Ingredient key={ingredient.id}>{ingredient.name}</Styles.Ingredient>
+                                    <Styles.Ingredient key={ingredient.id}>
+                                        <Styles.IngredientAmount>
+                                            {ingredient.amount} {ingredient.unit}
+                                        </Styles.IngredientAmount>
+                                        <Styles.IngredientText>{ingredient.name}</Styles.IngredientText>
+                                    </Styles.Ingredient>
                                 ))}
                             </Styles.InstructionContent>
                         </Styles.Instruction>
