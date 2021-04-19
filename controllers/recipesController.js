@@ -77,8 +77,6 @@ async function updateRecipe(req, res) {
     const id = Number(req.params.id);
     const { recipe, steps, ingredients } = req.body;
 
-    console.log(req.body);
-
     if (!id || !recipe || !steps || !ingredients) {
         return res.sendStatus(400);
     }

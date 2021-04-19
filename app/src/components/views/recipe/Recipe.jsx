@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import useFetch from '../../../hooks/useFetch';
 import Loader from '../../Loader';
 import { Col, Row } from '../../styled-components';
 import { mdiClockTimeFourOutline, mdiFormatListCheckbox, mdiFoodVariant } from '@mdi/js';
 import * as Styles from './recipe.styles';
 import Step from './RecipeStep';
-import EditRecipe from './EditRecipe';
 import { UserContext } from '../../contexts/UserContext';
+import { NavLink } from 'react-router-dom';
 
 function pluralize(string, number) {
     return number > 1 ? `${string}s` : string;
@@ -15,27 +15,14 @@ function pluralize(string, number) {
 export default function Recipe({ match }) {
     const { data: recipe, loading } = useFetch(`http://localhost:3000/api/recipes/${match.params.id}`);
 
-    const [editing, setEditing] = useState(false);
     const { isLoggedIn } = useContext(UserContext);
-
-    function closeEditMode() {
-        setEditing(false);
-    }
-
-    function openEditMode() {
-        setEditing(true);
-    }
-
-    if (editing) {
-        return <EditRecipe data={recipe} closeEditMode={closeEditMode} />
-    }
 
     return (
         <Styles.Wrapper as={Col}>
             {loading && <Loader message="Loading your recipe" />}
             {!loading && recipe && (
                 <Styles.Body>
-                    <button onClick={openEditMode}>Edit</button>
+                    <NavLink to={`/recipe/${recipe.id}/edit`}>Edit</NavLink>
                     <Styles.Header>
                         <Styles.HeaderMeta>
                             <Styles.Title>{recipe.name}</Styles.Title>

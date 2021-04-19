@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled, { css } from 'styled-components';
 import Home from "./views/Home";
 import Recipe from "./views/recipe/Recipe";
+import EditRecipe from './views/recipe/EditRecipe';
 
 export default function Main() {
     return (
@@ -9,6 +10,7 @@ export default function Main() {
             <Router>
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/recipe/:id/edit" exact component={EditRecipe} />
                     <Route path="/recipe/:id/:name?" exact component={Recipe} />
                     <Route>
                         404

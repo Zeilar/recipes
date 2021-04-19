@@ -1,13 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { Col, Row } from '../../styled-components';
+import { Col, Row, gridItem } from '../../styled-components';
 import Icon from '@mdi/react';
-
-export const gridItem = css`
-    background-color: rgb(${({ theme }) => theme.color.bodyDark});
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-    border-radius: ${({ theme }) => theme.borderRadius}px;
-`;
 
 export const Wrapper = styled.div.attrs({ justify: "center" })`
     padding: 30px;
